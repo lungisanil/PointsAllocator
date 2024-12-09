@@ -41,11 +41,10 @@ public class PointsAllocatorServiceImpl implements PointsAllocatorService {
                 updatedMemberTotalPointsEntity = this.memberTotalPointsRepository.save(PointsAllocatorTranslator.getMemberTotalPoints(eventPoints, totalPoints));
             }
 
-            String memberEmailAddress = "luvunolungisani@gmail.com";
             return PointsAllocatorTranslator.getPointsNotificationRequest(updatedMemberTotalPointsEntity,
                     request.getWorkoutEventPointsMnemonic().getDescription(),
                     eventPointsValue,
-                    memberEmailAddress);
+                    request.getWorkoutEventProcessRequest().getEmailAddress());
         } catch (Exception ex) {
             throw new InternalServerErrorException(String.format("Error occurred when trying to allocate points for event Id : %s",
                     workoutPointsEntity.getEventId()));
